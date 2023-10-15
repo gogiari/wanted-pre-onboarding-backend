@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -62,19 +63,34 @@ public class WorkControlller {
 
     // 채용공고 수정
     @PatchMapping("/work/update/{채용공고_id}")
-    public ResponseEntity<?> update(@PathVariable Long 채용공고_id, @RequestBody @Valid WorkUpdateDTO workUpdateDTO, BindingResult bindingResult) {
+    public ResponseEntity<?> update(@PathVariable Long 채용공고_id, @RequestBody @Valid WorkUpdateDTO workUpdateDTO,
+            BindingResult bindingResult) {
 
         // 채용공고id 기반 조회
         Optional<WorkEntity> workEntity = workService.findbyId(채용공고_id);
-        if(workEntity.isEmpty()){
+        if (workEntity.isEmpty()) {
             return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
         }
 
         // 회사_id변경 방지
-        if(workUpdateDTO.get회사_id() != null){
+        if (workUpdateDTO.get회사_id() != null) {
             return new ResponseEntity<>("회사_id는 변경불가.", HttpStatus.BAD_REQUEST);
         }
         workService.update(workUpdateDTO, workEntity.orElse(null));
         return new ResponseEntity<>(workEntity, HttpStatus.OK);
+    }
+
+    // 채용공고 삭제
+    @DeleteMapping("/work/delete/{채용공고_id}")
+    public ResponseEntity<?> delete(@PathVariable Long 채용공고_id) {
+
+        // 채용공고id 기반 조회
+        Optional<WorkEntity> workEntity = workService.findbyId(채용공고_id);
+        if (workEntity.isEmpty()) {
+            return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
+        }
+
+        workService.delete(채용공고_id);
+        return new ResponseEntity<>("채용공고 삭제 완료", HttpStatus.OK);
     }
 }
