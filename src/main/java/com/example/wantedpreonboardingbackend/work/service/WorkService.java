@@ -29,8 +29,8 @@ public class WorkService {
         workRepository.save(workEntity);
     }
     
-    public Optional<WorkEntity> findbyId(String 회사_id) {
-        Optional<WorkEntity> workEntity = workRepository.findById(회사_id);
+    public Optional<WorkEntity> findbyId(Long 채용공고_id) {
+        Optional<WorkEntity> workEntity = workRepository.findById(채용공고_id);
         return workEntity;
     }
 

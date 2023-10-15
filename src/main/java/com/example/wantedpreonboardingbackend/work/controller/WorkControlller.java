@@ -58,11 +58,11 @@ public class WorkControlller {
         return ResponseEntity.status(HttpStatus.OK).body(workCreateDTO);
     }
 
-    @PatchMapping("/work/update/{회사_id}")
-    public ResponseEntity<?> update(@PathVariable String 회사_id, @RequestBody @Valid WorkUpdateDTO workUpdateDTO, BindingResult bindingResult) {
-        Optional<WorkEntity> workEntity = workService.findbyId(회사_id);
+    @PatchMapping("/work/update/{채용공고_id}")
+    public ResponseEntity<?> update(@PathVariable Long 채용공고_id, @RequestBody @Valid WorkUpdateDTO workUpdateDTO, BindingResult bindingResult) {
+        Optional<WorkEntity> workEntity = workService.findbyId(채용공고_id);
         if(workEntity.isEmpty()){
-            return new ResponseEntity<>("회사_id를 확인해주세요", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
         }
         workService.update(workUpdateDTO, workEntity.orElse(null));
         return new ResponseEntity<>(workEntity, HttpStatus.OK);

@@ -2,6 +2,8 @@ package com.example.wantedpreonboardingbackend.work.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -19,10 +21,13 @@ import lombok.ToString;
 @ToString
 
 
-@Table(name = "채용등록")
+@Table(name = "채용공고")
 public class WorkEntity {
     @Id
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long 채용공고_id;
+
+    @Column(nullable = false)
     private String 회사_id;
 
     @Column(nullable = false)
