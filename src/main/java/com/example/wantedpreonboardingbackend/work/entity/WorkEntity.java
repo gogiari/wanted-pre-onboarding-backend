@@ -43,6 +43,9 @@ public class WorkEntity {
     private String 사용기술;
     
     public void update(@Valid WorkUpdateDTO workUpdateDTO){
+        if(workUpdateDTO.get채용공고_id() != null)
+        this.채용공고_id = workUpdateDTO.get채용공고_id();
+
         if(workUpdateDTO.get회사_id() != null)
         this.회사_id = workUpdateDTO.get회사_id();
         

@@ -30,6 +30,7 @@ public class WorkControlller {
     @Autowired
     WorkService workService;
 
+    // 채용공고 전체 조회
     @GetMapping("/work")
     public List<WorkEntity> list() {
         List<WorkEntity> workList = workService.findAll();
@@ -37,6 +38,7 @@ public class WorkControlller {
         return workList;
     }
 
+    // 채용공고 등록
     @PostMapping("/work/create")
     public ResponseEntity<?> create(@RequestBody @Valid WorkCreateDTO workCreateDTO, BindingResult bindingResult) {
         // System.out.println(workCreateDTO);
@@ -58,11 +60,19 @@ public class WorkControlller {
         return ResponseEntity.status(HttpStatus.OK).body(workCreateDTO);
     }
 
+    // 채용공고 수정
     @PatchMapping("/work/update/{채용공고_id}")
     public ResponseEntity<?> update(@PathVariable Long 채용공고_id, @RequestBody @Valid WorkUpdateDTO workUpdateDTO, BindingResult bindingResult) {
+
+        // 채용공고id 기반 조회
         Optional<WorkEntity> workEntity = workService.findbyId(채용공고_id);
         if(workEntity.isEmpty()){
             return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
+        }
+
+        // 회사_id변경 방지
+        if(workUpdateDTO.get회사_id() != null){
+            return new ResponseEntity<>("회사_id는 변경불가.", HttpStatus.BAD_REQUEST);
         }
         workService.update(workUpdateDTO, workEntity.orElse(null));
         return new ResponseEntity<>(workEntity, HttpStatus.OK);

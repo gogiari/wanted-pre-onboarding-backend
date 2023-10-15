@@ -8,6 +8,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class WorkUpdateDTO {
+    private Long 채용공고_id;
+
     private String 회사_id;
 
     private String 채용포지션;

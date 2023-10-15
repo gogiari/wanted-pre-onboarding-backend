@@ -36,8 +36,8 @@ public class WorkService {
 
     public void update(@Valid WorkUpdateDTO workUpdateDTO, WorkEntity workEntity) {
         // workEntity = workUpdateDTO.toEntity();
-        // System.out.println(workEntity.toString());
         workEntity.update(workUpdateDTO);
+        System.out.println(workEntity);
         workRepository.save(workEntity);
     }
     
