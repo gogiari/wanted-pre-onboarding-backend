@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,5 +53,10 @@ public class WorkControlller {
         }
         workService.save(workCreateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(workCreateDTO);
+    }
+
+    @PatchMapping("/work/update/{회사_id}")
+    public String update() {
+        return null;
     }
 }
