@@ -1,5 +1,6 @@
 package com.example.wantedpreonboardingbackend.work.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +49,23 @@ public class WorkService {
     // 채용공고 삭제
     public void delete(Long 채용공고_id) {
         workRepository.deleteById(채용공고_id);
+    }
+
+    // 채용공고 검색
+    public List<WorkEntity> search(String search) {
+        List<WorkEntity> findAll = workRepository.findAll();
+        List<WorkEntity> result = new ArrayList<>();
+        findAll.forEach(e -> {
+            String margeString = e.get회사_id() + " " + e.get채용포지션() + " " + e.get채용내용() + " " + e.get사용기술() + " " + e.get채용보상금();
+            // System.out.println(margeString);
+            if(margeString.toUpperCase().contains(search.toUpperCase())){
+                System.out.println(e);
+                result.add(e);
+            }
+        });
+        // System.out.println("=============================");
+        // System.out.println(result);
+        return result;
     }
     
 }
