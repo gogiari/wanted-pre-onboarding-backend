@@ -99,6 +99,13 @@ public class WorkControlller {
     @GetMapping("/work/search")
     public ResponseEntity<?> search(@RequestParam String search) {
         List<WorkEntity> result = workService.search(search);
+
+        // 검색 결과 없으면
+        if(result.isEmpty() ){
+            return new ResponseEntity<>("검색 결과 없음", HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
+
+    // 채용공고 상세 페이지
 }
