@@ -1,6 +1,7 @@
 package com.example.wantedpreonboardingbackend.work.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +67,13 @@ public class WorkService {
         });
         // System.out.println("=============================");
         // System.out.println(result);
+        return result;
+    }
+
+
+    // 채용공고 상세 페이지
+    public List<Integer> findbyIdDetail(String 회사_id) {
+        List<Integer> result = workRepository.findAllBy회사_id(회사_id);
         return result;
     }
     

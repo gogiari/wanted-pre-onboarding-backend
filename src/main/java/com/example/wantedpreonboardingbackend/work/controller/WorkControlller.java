@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wantedpreonboardingbackend.work.dto.WorkCreateDTO;
+import com.example.wantedpreonboardingbackend.work.dto.WorkDetailDTO;
 import com.example.wantedpreonboardingbackend.work.dto.WorkSelectDTO;
 import com.example.wantedpreonboardingbackend.work.dto.WorkUpdateDTO;
 import com.example.wantedpreonboardingbackend.work.entity.WorkEntity;
@@ -44,7 +45,8 @@ public class WorkControlller {
     // 채용공고 등록
     @PostMapping("/work/create")
     public ResponseEntity<?> create(@RequestBody @Valid WorkCreateDTO workCreateDTO, BindingResult bindingResult) {
-        // System.out.println(workCreateDTO);
+
+        // 필드를 다 안적었을때 에러(NotNull)
         if (bindingResult.hasErrors()) {
             List<Object> errorList = new ArrayList<>();
             bindingResult.getAllErrors().forEach(objectError -> {
@@ -116,6 +118,11 @@ public class WorkControlller {
         if (workEntity.isEmpty()) {
             return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(workEntity.orElse(null), HttpStatus.OK);
+        List<Integer> 회사가올린다른채용공고 = workService.findbyIdDetail(workEntity.orElse(null).get회사_id());
+
+        WorkDetailDTO workDetailDTO = workEntity.orElse(null).toDetailDTO(회사가올린다른채용공고);
+
+        return new ResponseEntity<>(workDetailDTO, HttpStatus.OK);
     }
+
 }

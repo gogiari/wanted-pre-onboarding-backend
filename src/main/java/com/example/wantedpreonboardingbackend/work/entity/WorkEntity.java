@@ -1,5 +1,7 @@
 package com.example.wantedpreonboardingbackend.work.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.Valid;
 
+import com.example.wantedpreonboardingbackend.work.dto.WorkDetailDTO;
 import com.example.wantedpreonboardingbackend.work.dto.WorkUpdateDTO;
 
 import lombok.Builder;
@@ -69,6 +72,17 @@ public class WorkEntity {
         this.채용보상금 = 채용보상금;
         this.채용내용 = 채용내용;
         this.사용기술 = 사용기술;
+    }
+
+    public WorkDetailDTO toDetailDTO(List<Integer> 회사가올린다른채용공고) {
+        return WorkDetailDTO.builder()
+                .회사_id(회사_id)
+                .채용포지션(채용포지션)
+                .채용보상금(채용보상금)
+                .채용내용(채용내용)
+                .사용기술(사용기술)
+                .회사가올린다른채용공고(회사가올린다른채용공고)
+                .build();
     }
 
 }
