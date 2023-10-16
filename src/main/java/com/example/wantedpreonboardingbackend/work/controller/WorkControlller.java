@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.wantedpreonboardingbackend.work.dto.WorkCreateDTO;
+import com.example.wantedpreonboardingbackend.work.dto.WorkSelectDTO;
 import com.example.wantedpreonboardingbackend.work.dto.WorkUpdateDTO;
 import com.example.wantedpreonboardingbackend.work.entity.WorkEntity;
 import com.example.wantedpreonboardingbackend.work.service.WorkService;
@@ -34,8 +35,8 @@ public class WorkControlller {
 
     // 채용공고 전체 조회
     @GetMapping("/work")
-    public List<WorkEntity> list() {
-        List<WorkEntity> workList = workService.findAll();
+    public List<WorkSelectDTO> list() {
+        List<WorkSelectDTO> workList = workService.findAll();
         System.out.println("리스트: " + workList.toString());
         return workList;
     }
@@ -98,7 +99,7 @@ public class WorkControlller {
     // 채용공고 검색
     @GetMapping("/work/search")
     public ResponseEntity<?> search(@RequestParam String search) {
-        List<WorkEntity> result = workService.search(search);
+        List<WorkSelectDTO> result = workService.search(search);
 
         // 검색 결과 없으면
         if(result.isEmpty() ){
@@ -108,4 +109,13 @@ public class WorkControlller {
     }
 
     // 채용공고 상세 페이지
+    @GetMapping("/work/detail/{채용공고_id}")
+    public ResponseEntity<?> detail(@PathVariable Long 채용공고_id) {
+         // 채용공고id 기반 조회
+        Optional<WorkEntity> workEntity = workService.findbyId(채용공고_id);
+        if (workEntity.isEmpty()) {
+            return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(workEntity.orElse(null), HttpStatus.OK);
+    }
 }

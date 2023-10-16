@@ -17,8 +17,8 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 
 
 @Table(name = "채용공고")

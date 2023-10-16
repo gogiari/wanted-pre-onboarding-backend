@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.wantedpreonboardingbackend.work.dto.WorkCreateDTO;
+import com.example.wantedpreonboardingbackend.work.dto.WorkSelectDTO;
 import com.example.wantedpreonboardingbackend.work.dto.WorkUpdateDTO;
 import com.example.wantedpreonboardingbackend.work.entity.WorkEntity;
 import com.example.wantedpreonboardingbackend.work.repository.WorkRepository;
@@ -20,8 +21,8 @@ public class WorkService {
     WorkRepository workRepository;
 
     // 전체조회
-    public List<WorkEntity> findAll() {
-        List<WorkEntity> workList = workRepository.findAll();
+    public List<WorkSelectDTO> findAll() {
+        List<WorkSelectDTO> workList = workRepository.findAllAsDTO();
         return workList;
     }
 
@@ -52,11 +53,11 @@ public class WorkService {
     }
 
     // 채용공고 검색
-    public List<WorkEntity> search(String search) {
-        List<WorkEntity> findAll = workRepository.findAll();
-        List<WorkEntity> result = new ArrayList<>();
+    public List<WorkSelectDTO> search(String search) {
+        List<WorkSelectDTO> findAll = workRepository.findAllAsDTO();
+        List<WorkSelectDTO> result = new ArrayList<>();
         findAll.forEach(e -> {
-            String margeString = e.get회사_id() + " " + e.get채용포지션() + " " + e.get채용내용() + " " + e.get사용기술() + " " + e.get채용보상금();
+            String margeString = e.get회사_id() + " " + e.get채용포지션() + " " + e.get사용기술() + " " + e.get채용보상금();
             // System.out.println(margeString);
             if(margeString.toUpperCase().contains(search.toUpperCase())){
                 System.out.println(e);
