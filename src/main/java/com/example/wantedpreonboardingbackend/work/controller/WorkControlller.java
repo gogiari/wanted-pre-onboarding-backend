@@ -46,7 +46,7 @@ public class WorkControlller {
     @PostMapping("/work/create")
     public ResponseEntity<?> create(@RequestBody @Valid WorkCreateDTO workCreateDTO, BindingResult bindingResult) {
 
-        // 필드를 다 안적었을때 에러(NotNull)
+        // 필드를 다 안적었을때 에러나 공백에러(NotNull)
         if (bindingResult.hasErrors()) {
             List<Object> errorList = new ArrayList<>();
             bindingResult.getAllErrors().forEach(objectError -> {
@@ -58,9 +58,9 @@ public class WorkControlller {
                 errorMap.put("message", message);
                 errorList.add(errorMap);
             });
-
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorList);
         }
+        
         workService.save(workCreateDTO);
         return ResponseEntity.status(HttpStatus.OK).body(workCreateDTO);
     }
