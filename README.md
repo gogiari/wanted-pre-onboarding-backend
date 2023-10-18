@@ -182,6 +182,7 @@ WorkController.java
 채용공고id를 통해 해당 데이터를 삭제 했습니다.
 
 ![WorkService.java](./readme_img//Untitled%2020.png)
+
 WorkService.java
 
 <br>
