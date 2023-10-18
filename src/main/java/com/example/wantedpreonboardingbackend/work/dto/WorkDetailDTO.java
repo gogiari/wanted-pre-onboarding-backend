@@ -2,7 +2,6 @@ package com.example.wantedpreonboardingbackend.work.dto;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +10,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class WorkDetailDTO {
     private Long 채용공고_id;
 
@@ -28,7 +26,9 @@ public class WorkDetailDTO {
     private List<Integer> 회사가올린다른채용공고;
 
     @Builder
-    public WorkDetailDTO(String 회사_id, String 채용포지션, Integer 채용보상금, String 채용내용, String 사용기술, List<Integer> 회사가올린다른채용공고) {
+    public WorkDetailDTO(Long 채용공고_id, String 회사_id, String 채용포지션, Integer 채용보상금, String 채용내용, String 사용기술,
+            List<Integer> 회사가올린다른채용공고) {
+        this.채용공고_id = 채용공고_id;
         this.회사_id = 회사_id;
         this.채용포지션 = 채용포지션;
         this.채용보상금 = 채용보상금;
@@ -37,3 +37,4 @@ public class WorkDetailDTO {
         this.회사가올린다른채용공고 = 회사가올린다른채용공고;
     }
 }
+

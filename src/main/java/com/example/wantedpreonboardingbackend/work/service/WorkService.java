@@ -72,6 +72,7 @@ public class WorkService {
 
     // 채용공고 상세 페이지
     public List<Integer> findbyIdDetail(String 회사_id) {
+        //채용공고id를 받아옴
         List<Integer> result = workRepository.findAllBy회사_id(회사_id);
         return result;
     }

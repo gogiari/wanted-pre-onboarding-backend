@@ -118,10 +118,12 @@ public class WorkControlller {
         if (workEntity.isEmpty()) {
             return new ResponseEntity<>("채용공고_id를 확인해주세요", HttpStatus.BAD_REQUEST);
         }
+
+        // 채용공고 id를 요청
         List<Integer> 회사가올린다른채용공고 = workService.findbyIdDetail(workEntity.orElse(null).get회사_id());
 
+        // 기존 채용공고 + 회사가올린다른채용공고를 DetailDTO 옮김
         WorkDetailDTO workDetailDTO = workEntity.orElse(null).toDetailDTO(회사가올린다른채용공고);
-
         return new ResponseEntity<>(workDetailDTO, HttpStatus.OK);
     }
 

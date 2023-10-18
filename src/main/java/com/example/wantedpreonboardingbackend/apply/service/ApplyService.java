@@ -18,6 +18,8 @@ public class ApplyService {
         applyRepository.save(applyEntity);
     }
 
+
+    // 1회만 지원, 중복 지원 방지
     public int findByDouble(@Valid ApplyEntity applyEntity) {
         Long 채용공고_id = applyEntity.get채용공고_id();
         String 사용자_id = applyEntity.get사용자_id();

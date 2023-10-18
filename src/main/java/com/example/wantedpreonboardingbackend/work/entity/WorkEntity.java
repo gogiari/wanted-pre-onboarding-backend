@@ -76,6 +76,7 @@ public class WorkEntity {
 
     public WorkDetailDTO toDetailDTO(List<Integer> 회사가올린다른채용공고) {
         return WorkDetailDTO.builder()
+                .채용공고_id(채용공고_id)
                 .회사_id(회사_id)
                 .채용포지션(채용포지션)
                 .채용보상금(채용보상금)
