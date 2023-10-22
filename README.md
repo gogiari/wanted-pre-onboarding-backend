@@ -8,7 +8,7 @@
 
 ### MariaDB
 
-### JBA
+### JPA
 <br>
 <br>
 
