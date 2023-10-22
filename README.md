@@ -4,9 +4,11 @@
 
 # 사용 언어 및 프레임 워크 및 환경
 
-### Java & Spring
+### Java & Spring Boot
 
 ### MariaDB
+
+### JBA
 <br>
 <br>
 
